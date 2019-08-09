@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /* ЗАДАЧА - 1
+    * Написать функцию, которая не принимает аргументов и спрашивает пользователя что он есть на завтрак
+    * Считается что пользователь может ввести только одно блюдо за один раз
+    * По этому нужно продолжать спрашивать ДО ТЕХ ПОР ПОКА ответом от пользователя не прийдет пустой ввод.
+    * КАЖДОЕ БЛЮДО, которое введет пользователь нужно помещать в массив fantasticBreakfast, который
+    * и будет возвращаемым значением функции.
+    * */
+
+
+    function askDish() {
+        let breakfast = '0';
+        let fantasticBreakfast = [];
+        while(breakfast){
+            breakfast = prompt('Enter your breakfast').trim();
+            if(breakfast) {
+                fantasticBreakfast.push(breakfast);
+            }
+        }
+        return fantasticBreakfast;
+    }
+
+    /* ЗАДАЧА - 2
+    * Написать функцию, которая будет принимать аргументом массив, в котором каждый елемент - название блюда которое пользователь ест на завтрак.
+    * Нужно почередно вывести в консоль каждое блюдо из этого массива. При этом удаляя это блюдо из массива.
+    * Таком образом после того как все блюда окажутся в консоли - массив должен остаться пустым
+    * Возвращаемое значение - отсутствует
+    * Сделать это при помощи классического цикла for И при помощи for of
+    * */
+
+    const fantasticBreakfast = ['apple', 'pear', 'eggs', 'bread'];
+
+    function dish(fantasticBreakfast) {
+        for (let i = fantasticBreakfast.length; i !== 0; i--) {
+            console.log(fantasticBreakfast.pop());
+        }
+    }
+
+    dish(fantasticBreakfast);
+
+
+    function dish2(fantasticBreakfast) {
+        for ( let item of fantasticBreakfast) {
+            console.log(fantasticBreakfast.pop());
+        }
+    }
+
+    dish2(fantasticBreakfast);
+
+
+    /* ЗАДАЧА - 3
+    * Написать функцию, которая принимает в качестве аргумента массив
+    * Возвращаемое значение - новый, другой массив со всеми елементами того, который был передан агрументом
+    * Сделать это при помощи: обычного циклка for, при помощи метода массива map()
+    */
+
+    let array = [1, 2, 3, 4, 5, 6, 7];
+
+    function map(array){
+        let result = [];
+        for(let i = 0; i < array.length; i++) {
+            result.push(array[i]);
+        }
+        return result;
+    }
+
+    map(array);
+
+    function map2(array){
+        return array.map(item => item);
+    }
+
+
+    /* ЗАДАЧА - 4
+    * Написать функцию getItemList(), которая будет получать от пользователя строку с перечисленными через запятую названиями товаров
+    * (они могут повторяться). После этого нужно преобразовать строку в МАССИВ С УНИКАЛЬНЫМИ ЗНАЧЕНИЯМИ
+    */
+    let str = "фен,вентилятор,телевизор,фен";
+    function getItemList(str) {
+
+        return Array.from(new Set(str.split(',')));
+    }
+    getItemList(str);
+
+    /* ЗАДАЧА - 5
+    * есть некий "склад", он же исходный массив, внутри которого лежат названия товаров.
+    * Пользователь желает вместо определенного товара(!одного!) вставить один или несколько новых.
+    *
+    * НУЖНО написать функцию replaceItems(insteadOf, insertValue):
+    * где insteadOf хранит строчное значение названия товара ВМЕСТО какого именно товара он будет вставлять новые.
+    * ОБЯЗАТЕЛЬНО ПРОВЕРИТЬ ЕСТЬ ЛИ ТАКОЙ ТОВАР НА СКЛАДЕ, если товара нет - спросить у пользователя корректные данные.
+    * insertValue - список елементов которые нужно вставить - один или несколько
+    *
+    * ВОЗВРАЩАЕМОЕ ЗНАЧЕНИЕ - отсутствует
+    * В исходном массиве(складе) ЗАМЕНИТЬ указанный товар, НА insertValue так, чтобы длинна исходного массива изменилась,
+    * т.е. каждый введенный пользователем товар добавляется отдельным товаром в уже существующий склад.
+    *
+    * 	ДОП ЗАДАНИЕ: переделать функцию  replaceItems так, чтобы вместо елемента указанного первым аргументом вставлялись все последующие аргументы
+    */
+
+    let storage = ['диктофон','тарелка','стул','конь'];
+
+    function replaceItems(insteadOf, insertValue) {
+        let index = storage.indexOf(insteadOf);
+        if( index !== -1) {
+            storage[index] = insertValue;
+        } else {
+            let correct = prompt("Enter correct product");
+            replaceItems(correct, insertValue);
+        }
+    }
+    replaceItems(insteadOf, insertValue);
+
+
+</script>
+</body>
+</html>
